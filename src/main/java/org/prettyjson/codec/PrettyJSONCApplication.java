@@ -10,14 +10,14 @@ import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-public class PrettyJsonApplication extends SpringBootServletInitializer {
+public class PrettyJSONCApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PrettyJsonApplication.class, args);
+		SpringApplication.run(PrettyJSONCApplication.class, args);
 	}
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		return builder.sources(PrettyJsonApplication.class);
+		return builder.sources(PrettyJSONCApplication.class);
 	}
 	@Bean
 	public RestTemplate restTemplate() {
