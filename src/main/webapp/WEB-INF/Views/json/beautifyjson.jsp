@@ -5,7 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <head>
    <style><%@include file="/WEB-INF/Views/css/base64.css"%></style>
-  <style>body{background-color:#1aa7ec;button { width: 170px;height: 50px;font-size: 20px}</style>
+  <style>body{background-color:#128FCB;button { width: 170px;height: 50px;font-size: 20px}</style>
 </head>
 
 
@@ -14,10 +14,10 @@
 		<div class="page-head">
 			<!-- BEGIN PAGE TITLE -->
 			<div class="page-title">
-				<h2>Base 64 Decoder</h2>
+				<h2>Pretty json generator</h2>
 			</div>
-			<button  type="submit"  , onclick="window.location.href = 'encode'">Encoder </button>
-            <button  type="submit"  , onclick="window.location.href = '/'">Decoder </button>
+			<button  type="submit"  , onclick="window.location.href = 'minify'">Minify </button>
+            <button  type="submit"  , onclick="window.location.href = '/'">Beautify </button>
             <br><br></br></br>
 			<!-- END PAGE TITLE -->
 		</div>
@@ -29,9 +29,9 @@
 									<div class="col-md-4 pull-left">
 										<div class="btn-group">
 
-										<textarea name="input" id="encoded" placeholder="Type (or paste) here..." spellcheck="false" rows="20" cols="100"></textarea>
+										<textarea name="input" id="minified" placeholder="Type (or paste) here..." spellcheck="false" rows="20" cols="100"></textarea>
 
-										<div style="float: center;padding: 17px;color: #000;position: relative;"><button type="submit" style="float:center;" id="clickAction" onclick="clickActions()">Click to decode</a></div>
+										<div style="float: center;padding: 17px;color: #000;position: relative;"><button type="submit" style="float:center;" id="clickAction" onclick="clickActions()">Click to Beautify</a></div>
 										</div>
 								</div>
 
@@ -48,11 +48,11 @@
 <script type="text/javascript">
 var clickActions = function() {
 $("#rdesc").value='';
- var encodedStr = document.getElementById('encoded').value;
-  if(encodedStr!=''){
+ var minifiedStr = document.getElementById('minified').value;
+  if(minifiedStr!=''){
   $.ajax({
-    url: "/getDecodedString",
-           data : "encodedString="+encodedStr,
+    url: "/getBeautifyJson",
+           data : "minifyJson="+encodeURIComponent(minifiedStr),
     cache: false,
     success: function(html){
 

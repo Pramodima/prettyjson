@@ -16,6 +16,6 @@ public class CronAsyncService {
     RestTemplate restTemplate;
     @Scheduled(cron = "0 3/14 * * * *")
     public void reloadMetaData(){
-        restTemplate.getForObject("https://base64-b6xr.onrender.com/health", String.class);
+        restTemplate.getForObject("https://prettyjson.onrender.com/health", String.class);
     }
 }

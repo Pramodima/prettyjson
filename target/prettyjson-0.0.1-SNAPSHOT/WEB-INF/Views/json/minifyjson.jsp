@@ -5,17 +5,17 @@
 <!DOCTYPE HTML>
 <head>
   <style><%@include file="/WEB-INF/Views/css/base64.css"%></style>
-  <style>body{background-color:#1aa7ec;button { width: 170px;height: 50px;font-size: 20px}</style>
+  <style>body{background-color:#128FCB;button { width: 170px;height: 50px;font-size: 20px}</style>
 </head>
 <div class="page-content-wrapper">
 	<div class="page-content">
 		<div class="page-head">
 			<!-- BEGIN PAGE TITLE -->
 			<div class="page-title">
-				<h2>Base 64 Encoder</h2>
+				<h2>Minify(Compact) Json generator</h2>
 			</div>
-			<button  type="submit"  , onclick="window.location.href = 'encode'">Encoder </button>
-            <button  type="submit"  , onclick="window.location.href = '/'">Decoder </button>
+			<button  type="submit"  , onclick="window.location.href = 'minify'">Minify </button>
+                        <button  type="submit"  , onclick="window.location.href = '/'">Beautify </button>
 			<br></br></br></br>
 			<!--<a href="encode" class=""><h3><a href="encode" rel="external"><i class=""></i>Encode</a></h3>
 			<a href="/" class="active"><h3><a href="/" rel="external"><i class=""></i>Decode</a></h3> -->
@@ -29,9 +29,9 @@
 									<div class="col-md-4 pull-left">
 										<div class="btn-group">
 
-										<textarea name="input" id="decoded" placeholder="Type (or paste) here..." spellcheck="false" rows="20" cols="100"></textarea>
+										<textarea name="input" id="beautified" placeholder="Type (or paste) here..." spellcheck="false" rows="20" cols="100"></textarea>
 
-										<div style="float: center;padding: 17px;color: #000;position: relative;"><button type="submit" style="float:center;" id="clickAction" onclick="clickActions()">Click to encode</a></div>
+										<div style="float: center;padding: 17px;color: #000;position: relative;"><button type="submit" style="float:center;" id="clickAction" onclick="clickActions()">Click to Minify</a></div>
 										</div>
 								</div>
 
@@ -49,11 +49,11 @@
 var clickActions = function() {
 $("#rdesc").value='';
 
- var decodedStr = document.getElementById('decoded').value;
-  if(decodedStr!=''){
+ var beautifiedStr = document.getElementById('beautified').value;
+  if(beautifiedStr!=''){
   $.ajax({
-    url: "/getEncodedString",
-           data : "decodedString="+encodeURIComponent(decodedStr),
+    url: "/getMinifyJson",
+           data : "beautifiedString="+encodeURIComponent(beautifiedStr),
     cache: false,
     success: function(html){
 

@@ -1,5 +1,8 @@
 package org.prettyjson.codec.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -16,25 +19,24 @@ public class PrettyJSONControler {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(PrettyJSONControler.class);
     @RequestMapping(method = RequestMethod.GET, path = "/")
     public String getPrettyJson(/* String encodedString*/ HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        return "prettyjson";
+        return "beautifyjson";
     }
     @ResponseBody
-    @RequestMapping(method = RequestMethod.GET, path = "/minifyJson")
-    public String getMinifyJson( String encodedString, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        String decodedValue ="";
+    @RequestMapping(method = RequestMethod.GET, path = "/getBeautifyJson")
+    public String getMinifyJson( String minifyJson, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        String indented="";
+        ObjectMapper objectMapper = new ObjectMapper();
         try {
-            decodedValue = new String(Base64.decodeBase64(encodedString));
-
+            Object json = objectMapper.readValue(minifyJson, Object.class);
+             indented = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(json);
+        } catch (JsonProcessingException e) {
+            indented="invalid input";
         }
-        catch(Exception e){
-        LOGGER.error("error "+e.getMessage());
-            decodedValue="invalid input";
-        }
-        return decodedValue;
+        return indented;
     }
     @RequestMapping(method = RequestMethod.GET, path = "/minify")
     public String encode( HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        return "encode";
+        return "minifyjson";
     }
     @ResponseBody
     @RequestMapping(method = RequestMethod.GET, path = "/health")
@@ -43,16 +45,16 @@ public class PrettyJSONControler {
     }
     @ResponseBody
     @RequestMapping(method = RequestMethod.GET, path = "/getMinifyJson")
-    public String getEncodedString( String decodedString, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        String encodedValue ="";
+    public String getEncodedString( String beautifiedString, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        String minifyStr="";
         try {
-            encodedValue = new String(Base64.encodeBase64(decodedString.getBytes()));
+            ObjectMapper objectMapper = new ObjectMapper();
+          JsonNode  jsonNode = objectMapper.readValue(beautifiedString, JsonNode.class);
+            minifyStr=jsonNode.toString();
+        } catch (JsonProcessingException e) {
+        minifyStr="invalid input";
+        }
 
-        }
-        catch(Exception e){
-            LOGGER.error("error "+e.getMessage());
-            encodedValue="invalid input";
-        }
-        return encodedValue;
+        return minifyStr;
     }
 }
