@@ -22,7 +22,7 @@ public class PrettyJSONControler {
         return "beautifyjson";
     }
     @ResponseBody
-    @RequestMapping(method = RequestMethod.GET, path = "/getBeautifyJson")
+    @RequestMapping(method = RequestMethod.POST, path = "/getBeautifyJson")
     public String getMinifyJson( String minifyJson, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         String indented="";
         ObjectMapper objectMapper = new ObjectMapper();
@@ -30,7 +30,7 @@ public class PrettyJSONControler {
             Object json = objectMapper.readValue(minifyJson, Object.class);
              indented = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(json);
         } catch (JsonProcessingException e) {
-            indented="invalid input";
+            indented=e.getMessage();
         }
         return indented;
     }
@@ -44,7 +44,7 @@ public class PrettyJSONControler {
         return "OK";
     }
     @ResponseBody
-    @RequestMapping(method = RequestMethod.GET, path = "/getMinifyJson")
+    @RequestMapping(method = RequestMethod.POST, path = "/getMinifyJson")
     public String getEncodedString( String beautifiedString, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         String minifyStr="";
         try {
@@ -52,7 +52,7 @@ public class PrettyJSONControler {
           JsonNode  jsonNode = objectMapper.readValue(beautifiedString, JsonNode.class);
             minifyStr=jsonNode.toString();
         } catch (JsonProcessingException e) {
-        minifyStr="invalid input";
+        minifyStr=e.getMessage();
         }
 
         return minifyStr;

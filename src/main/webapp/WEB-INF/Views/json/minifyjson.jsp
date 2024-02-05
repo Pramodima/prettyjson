@@ -53,6 +53,7 @@ $("#rdesc").value='';
   if(beautifiedStr!=''){
   $.ajax({
     url: "/getMinifyJson",
+            type: 'POST',
            data : "beautifiedString="+encodeURIComponent(beautifiedStr),
     cache: false,
     success: function(html){
