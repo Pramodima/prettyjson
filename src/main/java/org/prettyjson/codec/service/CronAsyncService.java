@@ -1,3 +1,4 @@
+/*
 package org.prettyjson.codec.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,3 +20,4 @@ public class CronAsyncService {
         restTemplate.getForObject("https://prettyjson.onrender.com/health", String.class);
     }
 }
+*/

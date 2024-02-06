@@ -29,7 +29,7 @@
 									<div class="col-md-4 pull-left">
 										<div class="btn-group">
 
-										<textarea name="input" class="numbered" id="minified" placeholder="Type (or paste) here..." spellcheck="false" rows="20" cols="100"></textarea>
+										<textarea name="input"  id="minified" placeholder="Type (or paste) here..." spellcheck="false" rows="20" cols="100"></textarea>
 
 										<div style="float: center;padding: 17px;color: #000;position: relative;"><button type="submit" style="float:center;" id="clickAction" onclick="clickActions()">Click to Beautify</a></div>
 										</div>
